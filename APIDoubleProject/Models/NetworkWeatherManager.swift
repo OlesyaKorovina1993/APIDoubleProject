@@ -13,6 +13,7 @@ struct NetworkWeatherManager {
         case cityName(city: String)
         case coordinate(latitude: CLLocationDegrees, longitude: CLLocationDegrees)
     }
+    var onCompletion: ((CurrentWeather)->Void)?
     
     func fetchCurrentWeather(forRequestType requestType: RequestType){
         var urlString = ""
@@ -23,11 +24,30 @@ struct NetworkWeatherManager {
         
     }
     fileprivate func performRequest(withURLString urlString: String){
+        guard let url = URL(string: urlString) else {return}
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                if let currentWeather = self.parseJSON(fromData: data){
+                    self.onCompletion?(currentWeather)
+            }
+          }
         
-    }
+      }
+        task.resume()//запуск запроса
+  }
     
     
-    fileprivate func parseJSON(){
-        
+    fileprivate func parseJSON(fromData data: Data) -> CurrentWeather? {
+        let decoder = JSONDecoder()
+        do{
+            let currentWeatherData = try decoder.decode(CurrentWeatherData.self, from: data)
+            guard let currentWeather = CurrentWeather(currentWeatherData: currentWeatherData) else {
+                return nil}
+            return currentWeather
+        }catch let error as NSError{
+            print(error.localizedDescription)
+        }
+        return nil
     }
 }
