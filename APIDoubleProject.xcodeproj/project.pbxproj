@@ -64,6 +64,7 @@
 		CE1F2646262DF24000F9BCE8 /* APIDoubleProject */ = {
 			isa = PBXGroup;
 			children = (
+				CE1F2655262DF24100F9BCE8 /* Info.plist */,
 				CE1F2661262F82E200F9BCE8 /* Extensions */,
 				CE1F2660262F82B300F9BCE8 /* Models */,
 				CE1F265F262F828E00F9BCE8 /* Views */,
@@ -81,7 +82,6 @@
 				CE1F2649262DF24000F9BCE8 /* SceneDelegate.swift */,
 				CE1F2650262DF24100F9BCE8 /* Assets.xcassets */,
 				CE1F2652262DF24100F9BCE8 /* LaunchScreen.storyboard */,
-				CE1F2655262DF24100F9BCE8 /* Info.plist */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";

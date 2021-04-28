@@ -9,6 +9,7 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
+    var networkWeatherManager = NetworkWeatherManager()
     
     lazy var locationManager: CLLocationManager = {
         let locManager = CLLocationManager()
