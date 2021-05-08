@@ -32,6 +32,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var feelsLikeTemperatureLabel: UILabel!
     
     
+    @IBAction func searchPressed(_ sender: UIButton) {
+        self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) {
+            [unowned self] city in 
+            self.networkWeatherManager.fetchCurrentWeather(forRequestType: .cityName(city: city))
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
